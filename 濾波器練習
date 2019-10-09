@@ -1,0 +1,13 @@
+clear all; close all;
+A=imread('wombats.png');
+imshow(A);
+a=7;s=1;
+g=fspecial('gaussian',[a a],s);
+A1=imfilter(A,g);
+figure,imshow(A1);
+lf=fspecial('log',[5 5]);
+A2=imfilter(A,lf);
+figure,imshow(double(A2)/60)
+uf=fspecial('unsharp',2/3);
+A3=imfilter(A,uf);
+figure,imshow(A3)
