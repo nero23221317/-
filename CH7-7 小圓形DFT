@@ -1,0 +1,7 @@
+clear all; close all;
+[x,y]=meshgrid(-128:217,-128:127);
+z=sqrt(x.^2+y.^2);
+c=(z<15);
+
+cf=fftshift(fft2(c));
+imshow(mat2gray(log(1+abs(cf))))
