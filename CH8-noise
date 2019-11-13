@@ -1,0 +1,18 @@
+clear all;close all;
+pkg image load;
+a=imread('LENNA.bmp');
+asp=imnoise(a,'salt and pepper',0.05);
+ao=ordfilt2(asp,5,[0 0 1 0 0;0 0 1 0 0 ;1 1 1 1 1 ; 0 0 1 0 0 ; 0 0 1 0 0]);
+imshow(a)%,figure,imshow(asp),figure,imshow(ao)
+
+asp=im2double(asp);
+av=[1 1 1;1 0 1;1 1 1]/8;
+aspa=imfilter(asp,av);
+D=0.5;
+r=abs(asp-aspa)>D;
+%figure,imshow(r.*aspa+(1-r).*asp)
+
+t=zeros([size(a),10]);
+for i=1:10 t(:,:,i)=imnoise(a,'gaussian');end
+ta= mean(t,3);
+figure,imshow(ta/256)
