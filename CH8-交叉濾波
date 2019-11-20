@@ -1,0 +1,21 @@
+clear all; close all;
+pkg image load;
+c=rgb2gray(imread('gull.png'));
+
+[rs,cs]=size(c);
+[x,y]=meshgrid(1:rs,1:cs);
+
+p=sin(x/3+y/5)+1;
+gp=(2*im2double(c)+p/2);
+imshow(mat2gray(gp))
+gf=fftshift(fft2(gp));
+figure,imshow(mat2gray(log(1+abs(gf))))
+gf2=im2uint8(mat2gray(abs(gf)));
+gf2(201,201)=0;
+[i,j]=find(gf2==max(gf2(:)))
+gf2=gf;
+gf2(i,:)=0;
+gf2(:,j)=0;
+figure,imshow(mat2gray(log(1+abs(gf2))));
+icfr=ifft2(gf2);
+figure,imshow(mat2gray(log(1+abs(icfr))));
