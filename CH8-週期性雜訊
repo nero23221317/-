@@ -18,6 +18,6 @@ d=sqrt(610);
 k=1;
 br=(z<floor(d-k)|z>ceil(d+k));
 cfr=gf.*br;
-figure,imshow(mat2gray(log(1+abs(cfr))));
+figure,fftshow(mat2gray(log(1+abs(cfr))));
 fi=ifft2(cfr);
-figure,imshow(mat2gray(log(1+abs(fi))))
+figure,fftshow(mat2gray(log(1+abs(fi))))
