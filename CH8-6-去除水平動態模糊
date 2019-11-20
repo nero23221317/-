@@ -1,0 +1,22 @@
+%水平動態模糊
+clear all; close all;
+c=imread('car.png');
+m=fspecial('motion',7,0);
+cm=imfilter(c,m);
+imshow(c)
+figure,imshow(cm)
+
+%產生模糊濾波器的傅立葉轉換矩陣
+m2=zeros(size(c));
+m2(1:7,1:7)=m;
+mf=fft2(m2);
+
+%將影像傅立葉轉換除以該轉換
+bmi=ifft2(fft2(cm)./mf);
+figure,fftshow(bmi,'abs');
+
+%對除法設限
+d=0.02;
+mf=fft2(m2); mf(find(abs(mf)<d))=1;
+bmi=ifft2(fft2(cm)./mf);
+figure,imshow(mat2gray(abs(bmi))*2)
