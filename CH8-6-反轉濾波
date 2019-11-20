@@ -1,0 +1,31 @@
+clear all; close all;
+b=imread('buffalo.png');
+bf=fftshift(fft2(b));
+[r,c]=size(b);
+[x,y]=meshgrid(-c/2:c/2-1,-r/2:r/2-1);
+bworth=1./(1+(sqrt(2)-1)*((x.^2+y.^2)/15^2).^2);
+bw=bf.*bworth;
+bwa=abs(ifft2(bw));
+blur=im2uint8(mat2gray(bwa));
+figure,imshow(blur)
+
+%反轉換，失敗
+blf=fftshift(fft2(blur));
+blfw=blf./bworth;
+bla=abs(ifft2(blfw));
+figure,imshow(mat2gray(bla))
+
+%解決方案1
+%blf=fftshift(fft2(blur));
+D=55;
+bworth2=1./(1+(sqrt(2)-1)*((x.^2+y.^2)/D^2).^10);
+blfb=blf./bworth.*bworth2;
+ba=abs(ifft2(blfb));
+figure,imshow(mat2gray(ba))
+
+%方案2
+d=0.01;
+bw=bworth;  %bw(find(bw<d))=1
+wl=fftshift(fft2(blur))./bw;
+wla=abs(ifft2(wl));
+figure,imshow(mat2gray(wla));
