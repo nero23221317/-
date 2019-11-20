@@ -19,4 +19,4 @@ figure,fftshow(bmi,'abs');
 d=0.02;
 mf=fft2(m2); mf(find(abs(mf)<d))=1;
 bmi=ifft2(fft2(cm)./mf);
-figure,imshow(mat2gray(abs(bmi))*2)
+figure,imshow(mat2gray(abs(bmi)).*2)
