@@ -25,7 +25,7 @@ figure,imshow(mat2gray(ba))
 
 %方案2
 d=0.01;
-bw=bworth;  %bw(find(bw<d))=1
+bw=bworth;  bw(find(bw<d))=1
 wl=fftshift(fft2(blur))./bw;
 wla=abs(ifft2(wl));
 figure,imshow(mat2gray(wla));
