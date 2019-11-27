@@ -1,0 +1,16 @@
+clear all; close all;
+pkg image load;
+p=im2double(imread('paramecium1.png'));
+[r,c]=size(p);
+[y,x]=meshgrid(linspace(0,1,c),linspace(0,1,r));
+p2=1-p+y/2;
+imshow(p2);
+
+out=zeros(r,c);
+starts=1:c/6:c
+ends=c/6:c/6:c
+for i=1:6
+    temp=p2(:,starts(i):ends(i));
+    out(:,starts(i):ends(i))=im2bw(temp,graythresh(temp));
+endfor
+figure,imshow(out);
