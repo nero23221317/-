@@ -1,0 +1,8 @@
+clear all; close all;
+pkg image load;
+s=imread('stairs.png');
+lap=fspecial('laplacian',0);
+s_lap=imfilter(s,lap);
+imshow(s_lap);
+
+figure,imshow(edge(s,'log'));
