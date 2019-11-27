@@ -1,0 +1,13 @@
+clear all; close all;
+pkg image load;
+s=imread('stairs.png');
+px=[-1 0 1;-1 0 1; -1 0 1]; py=px'
+sx=imfilter(s,px);
+sy=imfilter(s,py);
+imshow(sx),figure,imshow(sy);
+
+edge_p=uint8(sqrt(double(sx).^2+double(sy).^2));
+figure,imshow(edge_p);
+
+edge_pp=edge(s,'prewitt');
+figure,imshow(edge_pp);
