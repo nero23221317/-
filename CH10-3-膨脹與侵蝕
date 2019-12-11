@@ -1,0 +1,15 @@
+clear all; close all;
+pkg image load
+n = imread('pinenuts.png');
+p = ~(n>130 & n<165);
+sq = ones(3,3);
+pe = imerode(p,sq);
+p_int = p & ~pe;
+imshow(p),figure,imshow(p_int);
+
+%外部邊界與型態梯度
+pd = imdilate(p,sq);
+p_ext = pd & ~p;
+p_grad = pd & ~pe;
+figure,imshow(p_ext);
+figure,imshow(p_grad);
