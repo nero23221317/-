@@ -1,0 +1,26 @@
+clear all; close all;
+pkg image load
+c = imread('rice.tif');
+x = rand(size(c));
+d1 = find(x<=0.1);
+d2 = find(x>=0.9);
+c(d1) = 0;
+c(d2) = 1;
+c = c>110;
+imshow(c);
+%a,將c執行膨脹,使用3x3方形結構元素
+sq = ones(3,3);
+ca = imdilate(c,sq);
+figure,imshow(ca);
+
+%b,將c執行侵蝕
+cb = imerode(c,sq);
+figure,imshow(cb);
+
+%c,將c執行型態梯度
+c_grad = ca & ~cb;
+figure,imshow(c_grad);
+
+%d,先開啟再關閉
+cd = imclose(imopen(c,sq),sq);
+figure,imshow(cd);
