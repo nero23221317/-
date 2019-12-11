@@ -4,6 +4,7 @@ n = imread('pinenuts.png');
 p = ~(n>130 & n<165);
 sq = ones(3,3);
 pe = imerode(p,sq);
+%內部邊界
 p_int = p & ~pe;
 imshow(p),figure,imshow(p_int);
 
