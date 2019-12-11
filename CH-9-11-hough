@@ -1,0 +1,30 @@
+a.)
+clear all; close all;
+pkg image load
+c = imread('blocks.tif');
+e = edge(c,'canny');
+[x,y] = find(e==1);
+th = 0:179; cos_th = cosd(th); sin_th = sind(th);
+rtable = floor(x*cos_th+y*sin_th);
+u= unique(rtable);
+N = length(u);
+for j = 1:180,
+  for i =1:N,
+    hough(i,j) = length(find(rtable(:,j)==u(i)));
+  endfor
+endfor
+imshow(c),figure,imshow(mat2gray(hough))
+
+b.)
+clear all; close all;
+pkg image load
+c = imread('cameraman.tif');
+a = edge(c,'canny');
+hc = hough2(a);
+imshow(mat2gray(hc));
+max(hc(:))
+[r,theta] = find(hc==122)
+c2 = imadd(imdivide(c,4),192);
+figure,imshow(c2);
+houghline(c2,r,theta)
+figure,imshow(a)
