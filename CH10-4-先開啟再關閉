@@ -1,0 +1,13 @@
+clear all; close all;
+pkg image load
+c = imread('circles.png');
+x = rand(size(c));
+c(find(x>0.95)) = 0;
+c(find(x<0.05)) = 1;
+imshow(c);
+sq = ones(3,3);
+cr = [0 1 0; 1 1 1; 0 1 0];
+cf1 = imclose(imopen(c,sq),sq);
+figure,imshow(cf1);
+cf2 = imclose(imopen(c,cr),cr);
+figure,imshow(cf2);
