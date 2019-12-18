@@ -1,0 +1,7 @@
+clear all; close all;
+pkg image load
+p = imread('pinenuts.png');
+p2 = ~im2bw(p,graythresh(p));
+p3 = imopen(p2,strel('disk',5,0));
+imshow(p2);
+figure,imshow(p3);
