@@ -8,3 +8,15 @@ nb = n & ~imerode(n,sq);
 figure,imshow(nb);
 nf = bwfill(nb,97,197,sq);
 figure,imshow(nf);
+
+
+%骨架化
+clear all; close all;
+pkg image load
+n = imread('nicework.png');
+sq = ones(3,3);
+cr = [0 1 0; 1 1 1; 0 1 0];
+nk = imskel(n,sq);
+imshow(nk);
+nk2 = imskel(n,cr);
+figure,imshow(nk2);
