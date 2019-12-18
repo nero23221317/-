@@ -1,0 +1,9 @@
+%區域填充
+clear all; close all;
+pkg image load
+n = imread('nicework.png');
+sq = ones(3,3);
+nb = n & ~imerode(n,sq);
+imshow(nb);
+nf = bwfill(nb,97,197,sq);
+figure,imshow(nf);
