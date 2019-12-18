@@ -1,0 +1,11 @@
+clear all; close all;
+pkg image load
+t = imread('morph_text.png');
+b1 = [0 1 1 0 ; 1 1 1 1 ; 1 1 1 1 ; 0 1 1 0];
+b2 = ones(6); b2(2:5,2:5) = ~b1 ;
+tb1 = imerode(t,b1);
+tb2 = imerode(~t,b2);
+hit_or_miss = tb1 & tb2;
+[x,y] = find(hit_or_miss == 1)
+imshow(tb1);
+figure,imshow(hit_or_miss); %剩一個白點
