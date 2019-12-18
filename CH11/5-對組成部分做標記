@@ -1,0 +1,17 @@
+clear all; close all;
+pkg image load
+im = zeros(8,8);
+im(2:4,3:6) = 1;
+im(5:7,2) = 1;
+im(6:7,5:8) = 1;
+im(8,4:5) = 1;
+bwlabel(im,4)
+bwlabel(im,8)
+
+
+
+n = imread('pinenuts.png');
+cr = [0 1 0; 1 1 1; 0 1 0];
+n1 = n<125; n1 = imopen(n1,cr);
+nb = bwlabel(n1);
+max(nb(:)) %ans = 78
