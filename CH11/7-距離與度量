@@ -1,0 +1,11 @@
+%須下載disttrans函數
+
+clear all; close all;
+pkg image load
+c = imread('L9_2.bmp');
+mask = [Inf 1 Inf;1 0 Inf;Inf Inf Inf];
+ans1 = disttrans(c,mask);
+ans2 = disttrans(1-c,mask);
+imshow(c);
+figure,imshow(mat2gray(ans1));
+figure,imshow(mat2gray(ans2));
